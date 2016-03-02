@@ -10,7 +10,8 @@ Debugmsg1=$Debugmsg1"verwendbar mit          : FB.common v0.1.6 / FB.cfg v0.1.1 
 
 Debug="1"			 			   # mit "0" deaktivieren, wenn nicht mehr benötigt
 
-ADDONDIR="/usr/local/addons/cuxd"
+#ADDONDIR="/usr/local/addons/cuxd"
+ADDONDIR="/opt/ccuio-fritzbox"
 #COMMON="FB.common"
 COMMON="$ADDONDIR/user/FB.common"
 . $COMMON

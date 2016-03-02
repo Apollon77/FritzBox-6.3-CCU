@@ -42,15 +42,18 @@ elif [ "$pwd" != "" ] && [ "$Debug" = "1" ]; then
 elif [ "$pwd" != "" ] && [ "$Debug" = "2" ]; then
 	pwd_chk="$pwd"
 fi
-if [ "$RANDOM" != "" ]; then
-	CCU="CCU2"
-else
-	CCU="CCU1"
-fi
+#if [ "$RANDOM" != "" ]; then
+#	CCU="CCU2"
+#else
+#	CCU="CCU1"
+#fi
+CCU="CCU2"
 export LD_LIBRARY_PATH=$ADDONDIR
 
-HOMEMATIC="127.0.0.1"
-cURL='/usr/local/addons/cuxd/curl'
+#HOMEMATIC="127.0.0.1"
+HOMEMATIC="192.168.178.38"
+#cURL='/usr/local/addons/cuxd/curl'
+cURL='/usr/bin/curl'
 cURL_timout="-m 5"
 
 temp="/tmp"
@@ -121,8 +124,8 @@ $Debugmsg2" > $DebugFile
 
 set_CCU_SysVar(){
 	if [ "$1" != "" ]; then
-		Debugmsg1=$Debugmsg1"set_CCU_SysVar: http://$HOMEMATIC:8181/FritzBox.exe?Status=dom.GetObject%28%27$2%27%29.State%28%22$1%22%29 \n"
-		$cURL -s $cURL_timout "http://$HOMEMATIC:8181/FritzBox.exe?Status=dom.GetObject%28%27$2%27%29.State%28%22$1%22%29"	
+		Debugmsg1=$Debugmsg1"set_CCU_SysVar: http://$HOMEMATIC:8080/api/set/$2/?value=$1 \n"
+		$cURL -s $cURL_timout "http://$HOMEMATIC:8080/api/set/$2/?value=$1"	
 	else
 		Debugmsg1=$Debugmsg1"$IP -> set_CCU_SysVar: $3/$2 - Fehler, keine Status.\n"
 		logger -i -t $0 -p 3 "$IP -> set_CCU_SysVar: $3/$2 - Fehler, keine Status."
